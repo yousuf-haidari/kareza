@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kareza Cafe | Oshawa</title>
+  <meta name="description" content="Specialty coffee, baked goods, and a cozy atmosphere in downtown Oshawa. View menu, hours, and contact info." />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --muted:#a7a7a7;
+      --text:#f3f3f3;
+      --brand:#d6b27a; /* warm gold */
+      --brand2:#8e6b3a;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(214,178,122,.14), transparent 60%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(142,107,58,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1120px, 92%); margin-inline:auto}
+    .pill{
+      display:inline-flex; gap:.5rem; align-items:center;
+      padding:.45rem .75rem; border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:999px; color:var(--muted); font-size:.92rem;
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,11,11,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:.7rem;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(214,178,122,.9), rgba(142,107,58,.8));
+      box-shadow: 0 10px 25px rgba(214,178,122,.12);
+      display:grid; place-items:center;
+      color:#1a1a1a; font-weight:900;
+    }
+    .nav-links{
+      display:flex; gap:1.1rem; align-items:center;
+      color:var(--muted);
+    }
+    .nav-links a{padding:.35rem .4rem; border-radius:10px}
+    .nav-links a:hover{background:rgba(255,255,255,.04); color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:.8rem 1rem;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:600;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.14)}
+    .btn-primary{
+      border-color: rgba(214,178,122,.35);
+      background: linear-gradient(135deg, rgba(214,178,122,.18), rgba(142,107,58,.08));
+      box-shadow: 0 14px 45px rgba(214,178,122,.12);
+    }
+
+    .hamburger{display:none}
+
+    /* HERO */
+    .hero{padding: 3.4rem 0 2.2rem}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:2.2rem;
+      align-items:stretch;
+    }
+    .hero h1{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.2px;
+      line-height:1.08;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      margin: 1rem 0 .8rem;
+    }
+    .hero p{
+      color:var(--muted);
+      font-size:1.05rem;
+      margin:0 0 1.1rem;
+      max-width: 60ch;
+    }
+    .hero-actions{display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1rem}
+    .stats{
+      display:flex; gap:1rem; flex-wrap:wrap;
+      margin-top:1.4rem;
+      color:var(--muted);
+    }
+    .stat{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:.85rem 1rem;
+      min-width: 155px;
+    }
+    .stat b{display:block; color:var(--text); font-size:1.08rem}
+    .hero-card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-img{
+      height: 100%;
+      min-height: 420px;
+      background:
+        radial-gradient(800px 500px at 40% 20%, rgba(214,178,122,.20), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.65)),
+        url("https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1600&q=70");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .hero-card-overlay{
+      position:absolute; inset:auto 0 0 0;
+      padding:1.1rem 1.1rem 1.2rem;
+      border-top:1px solid var(--line);
+      background: rgba(10,10,10,.55);
+      backdrop-filter: blur(12px);
+      display:flex; gap:1rem; align-items:flex-start; justify-content:space-between;
+    }
+    .hero-card-overlay .small{color:var(--muted); font-size:.95rem}
+    .badge{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.45rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(214,178,122,.28);
+      background: rgba(214,178,122,.10);
+      color: #f5e7cf;
+      font-weight:700;
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+
+    /* SECTIONS */
+    section{padding: 2.2rem 0}
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between; gap:1rem;
+      margin-bottom:1rem;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:1.55rem;
+      font-family:"Playfair Display", serif;
+      letter-spacing:.2px;
+    }
+    .section-title p{margin:0; color:var(--muted)}
+
+    .grid-3{display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:1.1rem;
+    }
+    .card h3{margin:.2rem 0 .35rem; font-size:1.05rem}
+    .card p{margin:0; color:var(--muted)}
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(214,178,122,.16), rgba(142,107,58,.08));
+      border:1px solid rgba(214,178,122,.20);
+      color:#f5e7cf;
+      font-weight:900;
+    }
+
+    /* MENU */
+    .menu-wrap{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:1rem;
+      align-items:start;
+    }
+    .menu-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem}
+    .menu-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:1rem;
+      display:flex; gap:.8rem;
+    }
+    .menu-thumb{
+      width:54px; height:54px; border-radius:16px;
+      background: linear-gradient(135deg, rgba(214,178,122,.22), rgba(142,107,58,.10));
+      border:1px solid rgba(255,255,255,.08);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+      color:#f5e7cf;
+      font-weight:900;
+    }
+    .menu-item b{display:block}
+    .menu-item .desc{color:var(--muted); font-size:.95rem; margin-top:.25rem}
+    .menu-item .price{margin-top:.55rem; color:#f5e7cf; font-weight:700}
+
+    .menu-aside{
+      position:sticky; top:84px;
+    }
+    .aside-box{
+      border:1px solid rgba(214,178,122,.20);
+      background: linear-gradient(135deg, rgba(214,178,122,.10), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      padding:1.1rem;
+    }
+    .aside-box h3{margin:0 0 .3rem}
+    .aside-box p{margin:0 0 .8rem; color:var(--muted)}
+    .tag-row{display:flex; flex-wrap:wrap; gap:.5rem}
+    .tag{
+      font-size:.92rem;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+
+    /* REVIEWS */
+    .reviews{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:1rem;
+    }
+    blockquote{
+      margin:0;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:1.1rem;
+    }
+    blockquote p{margin:0 0 .7rem; color:var(--text)}
+    blockquote footer{color:var(--muted); display:flex; justify-content:space-between; gap:1rem; align-items:center}
+    .stars{letter-spacing:1px; color:#f5e7cf}
+
+    /* FAQ */
+    .faq{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    details{padding:1rem 1.1rem; border-top:1px solid var(--line)}
+    details:first-child{border-top:none}
+    summary{cursor:pointer; font-weight:700}
+    details p{margin:.6rem 0 0; color:var(--muted)}
+
+    /* CONTACT */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:1rem;
+      align-items:stretch;
+    }
+    .map{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      overflow:hidden;
+      min-height: 320px;
+    }
+    .map iframe{width:100%; height:100%; border:0}
+    .contact .card{height:100%}
+
+    /* FOOTER */
+    footer{
+      padding: 2rem 0 2.4rem;
+      border-top: 1px solid var(--line);
+      color:var(--muted);
+    }
+    .footer-grid{
+      display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+      align-items:center;
+    }
+    .fine{font-size:.92rem}
+
+    /* MOBILE */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr; }
+      .hero-img{min-height: 360px}
+      .grid-3{grid-template-columns:1fr}
+      .menu-wrap{grid-template-columns:1fr}
+      .menu-aside{position:static}
+      .menu-grid{grid-template-columns:1fr}
+      .reviews{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .hamburger{
+        display:inline-flex;
+        gap:.5rem; align-items:center;
+        padding:.7rem .9rem;
+        border-radius:14px;
+        border:1px solid var(--line);
+        background:rgba(255,255,255,.04);
+        color:var(--text);
+      }
+      .mobile-menu{
+        display:none;
+        border-top:1px solid var(--line);
+        padding:.8rem 0 1rem;
+      }
+      .mobile-menu a{
+        display:block;
+        padding:.8rem .2rem;
+        color:var(--muted);
+        border-radius:12px;
+      }
+      .mobile-menu a:hover{background:rgba(255,255,255,.04); color:var(--text)}
+      .mobile-menu .btn{width:100%; margin-top:.6rem}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="logo">K</span>
+          <span>Kareza Cafe</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#menu">Menu</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#faq">FAQs</a>
+          <a href="#contact">Contact</a>
+          <a class="btn btn-primary" href="#contact">Get Directions</a>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          Menu ▾
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#menu">Menu</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-primary" href="#contact">Get Directions</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="pill">Downtown Oshawa • Specialty Coffee • Baked Goods</div>
+
+      <div class="hero-grid">
+        <div>
+          <h1>A cozy café experience—crafted with care.</h1>
+          <p>
+            A warm space for specialty coffee, fresh pastries, and quiet moments.
+            Browse the menu, check hours, and get directions in one place.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#menu">View Menu</a>
+            <a class="btn" href="#reviews">See Reviews</a>
+            <a class="btn" href="#contact">Hours & Location</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <b>4.6★ Rating</b>
+              <span>Trusted by locals</span>
+            </div>
+            <div class="stat">
+              <b>Takeout • Dine-in</b>
+              <span>Easy & fast</span>
+            </div>
+            <div class="stat">
+              <b>Fresh pastries</b>
+              <span>Daily favorites</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Preview image">
+          <div class="hero-img" role="img" aria-label="Cafe interior / coffee"></div>
+          <div class="hero-card-overlay">
+            <div>
+              <div style="font-weight:800; margin-bottom:.25rem;">Kareza Cafe</div>
+              <div class="small">Your official website concept preview.</div>
+            </div>
+            <div class="badge">Open late • Cozy vibe</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- HIGHLIGHTS -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Why customers love it</h2>
+        <p>Simple, warm, and memorable.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">☕</div>
+          <h3>Signature lattes</h3>
+          <p>Seasonal specials and classic favorites—balanced and beautifully presented.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🥐</div>
+          <h3>Fresh baked goods</h3>
+          <p>Pastries that pair perfectly with coffee—great for breakfast or a sweet break.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✨</div>
+          <h3>Cozy atmosphere</h3>
+          <p>A calm place for a chat with friends or quiet time with your drink.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu">
+    <div class="container">
+      <div class="section-title">
+        <h2>Menu preview</h2>
+        <p>Demo items only — final menu added after approval.</p>
+      </div>
+
+      <div class="menu-wrap">
+        <div class="menu-grid" aria-label="Menu items">
+          <div class="menu-item">
+            <div class="menu-thumb">☕</div>
+            <div>
+              <b>Baklava Latte</b>
+              <div class="desc">Smooth espresso with a sweet, nutty finish.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-thumb">🧊</div>
+            <div>
+              <b>Iced Matcha</b>
+              <div class="desc">Creamy, refreshing, and perfectly balanced.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-thumb">🥐</div>
+            <div>
+              <b>Pistachio Croissant</b>
+              <div class="desc">Rich pistachio flavor in a flaky, buttery pastry.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-thumb">🍰</div>
+            <div>
+              <b>Cheesecake Slice</b>
+              <div class="desc">Creamy, indulgent, and made to share.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-thumb">🥪</div>
+            <div>
+              <b>Honey Walnut Toast</b>
+              <div class="desc">Sweet + savory toast for a light bite.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-thumb">🥤</div>
+            <div>
+              <b>Seasonal Refresher</b>
+              <div class="desc">A bright, fruity drink to cool down.</div>
+              <div class="price">$ —</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="menu-aside">
+          <div class="aside-box">
+            <h3>Built for customers</h3>
+            <p>Clear menu, fast loading, easy directions, and strong first impression.</p>
+            <div class="tag-row">
+              <span class="tag">Mobile-first</span>
+              <span class="tag">Fast & clean</span>
+              <span class="tag">Review section</span>
+              <span class="tag">SEO-ready</span>
+            </div>
+            <div style="margin-top:1rem; display:flex; gap:.6rem; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="#contact">Get Directions</a>
+              <a class="btn" href="#faq">FAQs</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-title">
+        <h2>Reviews preview</h2>
+        <p>Layout example — can be connected to Google Reviews.</p>
+      </div>
+
+      <div class="reviews">
+        <blockquote>
+          <p>“Beautiful cozy place with the best vibes. Everything I tried was surprisingly delicious.”</p>
+          <footer>
+            <span>Customer Review</span>
+            <span class="stars">★★★★★</span>
+          </footer>
+        </blockquote>
+
+        <blockquote>
+          <p>“Amazing food and coffee. Great ambiance — not like a typical chain cafe.”</p>
+          <footer>
+            <span>Customer Review</span>
+            <span class="stars">★★★★★</span>
+          </footer>
+        </blockquote>
+
+        <blockquote>
+          <p>“Warm and inviting atmosphere, friendly staff, and specialty lattes presented so well.”</p>
+          <footer>
+            <span>Customer Review</span>
+            <span class="stars">★★★★★</span>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div style="margin-top:1rem; display:flex; gap:.7rem; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#contact">Visit the cafe</a>
+        <a class="btn" href="#" onclick="alert('In the final version, this button can link directly to the Google review page.'); return false;">Leave a Google Review</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-title">
+        <h2>FAQs</h2>
+        <p>Quick answers customers look for.</p>
+      </div>
+
+      <div class="faq">
+        <details open>
+          <summary>Do you offer takeout and dine-in?</summary>
+          <p>Yes — customers can enjoy dine-in or takeout. Delivery options can be added if available.</p>
+        </details>
+        <details>
+          <summary>Do you have allergy information?</summary>
+          <p>We can add an allergy note and ingredient highlights for key items on the final menu page.</p>
+        </details>
+        <details>
+          <summary>Can the website show real Google reviews?</summary>
+          <p>Yes — we can embed reviews using a widget or connect via an API (depending on the final setup).</p>
+        </details>
+        <details>
+          <summary>Can you add policies (refund, privacy, etc.)?</summary>
+          <p>Yes — the final site can include policies, FAQs, and a contact form.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+<!-- CONTACT / HOURS & LOCATION -->
+<section id="contact">
+  <div class="container">
+    <div class="section-title">
+      <h2>Hours & Location</h2>
+      <p>Make it easy for customers to visit.</p>
+    </div>
+
+    <div class="contact">
+      <!-- Info -->
+      <div class="card">
+        <h3 style="margin-top:0;">KARÈZA CAFÉ</h3>
+        <p style="margin:.35rem 0 1rem; color:var(--muted);">
+          Fresh brews and cozy vibes ☕️ • Women-owned cafe 🤎
+        </p>
+
+        <div style="display:grid; gap:.8rem;">
+          <div>
+            <b>Address</b>
+            <div style="color:var(--muted); margin-top:.25rem;">
+              37 Debwewin Miikan, Oshawa, ON
+            </div>
+          </div>
+
+          <div>
+            <b>Winter Hours</b>
+            <div style="color:var(--muted); margin-top:.25rem;">
+              Monday: Closed<br>
+              Tuesday – Friday: 8AM – 9PM<br>
+              Saturday: 9AM – 9PM<br>
+              Sunday: 9AM – 8PM
+            </div>
+          </div>
+
+          <div>
+            <b>Ramadan Hours <span style="color:var(--muted); font-weight:500;">(Feb 18 – Mar 20)</span></b>
+            <div style="color:var(--muted); margin-top:.25rem;">
+              Monday: Closed<br>
+              Tuesday – Friday: 8AM – 5PM &nbsp;•&nbsp; 8:30PM – 12AM<br>
+              Saturday – Sunday: 9AM – 5PM &nbsp;•&nbsp; 8:30PM – 12AM
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons only -->
+        <div style="display:flex; gap:.7rem; flex-wrap:wrap; margin-top:1rem;">
+          <a class="btn btn-primary"
+             href="https://www.google.com/maps?q=37%20Debwewin%20Miikan%20Oshawa%20ON"
+             target="_blank" rel="noopener">
+            Directions
+          </a>
+        </div>
+
+        <p class="fine" style="margin-top:1rem;">
+          Preview site only — domain, full menu, photos, FAQs, and policies can be added after approval.
+        </p>
+      </div>
+
+      <!-- Map -->
+      <div class="map">
+        <iframe
+          title="Kareza Cafe Location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=37%20Debwewin%20Miikan%20Oshawa%20ON&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="brand">
+          <span class="logo">K</span>
+          <span>
+            <b style="color:var(--text)">Kareza Cafe</b><br/>
+            <span class="fine">Professional preview website</span>
+          </span>
+        </div>
+        <div class="fine">© <span id="year"></span> Kareza Cafe • All rights reserved</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.getElementById("hamburger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    hamburger?.addEventListener("click", () => {
+      const open = mobileMenu.style.display === "block";
+      mobileMenu.style.display = open ? "none" : "block";
+      hamburger.setAttribute("aria-expanded", String(!open));
+    });
+
+    // Close mobile menu on link click
+    mobileMenu?.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        mobileMenu.style.display = "none";
+        hamburger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
